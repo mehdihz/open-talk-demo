@@ -1,42 +1,58 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+// @flow
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  View,
+  FlatList,
+  Image
+} from "react-native";
+import ImageItem from "./components/ImageItem";
 
-const instructions = "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu";
+import posts from "./data/posts";
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Hello to iOS based React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <SafeAreaView
+        style={{
+          backgroundColor: "white",
+          flex: 1
+        }}
+      >
+        <Text
+          style={{
+            alignSelf: "center",
+            marginTop: 24,
+            fontSize: 25,
+            color: "#333"
+          }}
+        >
+          Open-talk Demo
+        </Text>
+        <FlatList
+          data={posts}
+          keyExtractor={item => {
+            return item.id;
+          }}
+          renderItem={row => {
+            return <ImageItem item={row.item} />;
+          }}
+          ItemSeparatorComponent={() => {
+            return (
+              <View
+                style={{
+                  height: 42
+                }}
+              />
+            );
+          }}
+        />
+      </SafeAreaView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  }
-});
