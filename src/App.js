@@ -27,7 +27,7 @@ export default class App extends Component<Props> {
         <Text
           style={{
             alignSelf: "center",
-            marginTop: 24,
+            marginVertical: 18,
             fontSize: 25,
             color: "#333"
           }}
